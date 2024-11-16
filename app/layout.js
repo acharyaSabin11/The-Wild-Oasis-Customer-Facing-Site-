@@ -3,6 +3,7 @@ import Header from './_components/Header';
 import { Josefin_Sans } from 'next/font/google';
 import { ReservationProvider } from './_contexts/ReservationContext';
 import ReservationReminder from './_components/ReservationReminder';
+import { Toaster } from 'react-hot-toast';
 
 const josefinSans = Josefin_Sans({
     subsets: ['latin'],
@@ -29,6 +30,7 @@ function Layout({ children }) {
                         </main>
                     </ReservationProvider>
                 </div>
+                <div><Toaster /></div>
             </body>
         </html>
     );

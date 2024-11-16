@@ -31,3 +31,20 @@ export async function getGuestByEmail(email) {
 
     return data[0];
 }
+
+export async function updateGuest({ guestId, updateData }) {
+    console.log(guestId, updateData);
+    const { data, error } = await supabase
+        .from('guests')
+        .update(updateData)
+        .eq('id', guestId)
+        .select();
+
+    if (error) {
+        console.log(error);
+        throw new Error("Couldn't update the guest");
+    }
+
+    return data;
+
+}
