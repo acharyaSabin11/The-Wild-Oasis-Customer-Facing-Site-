@@ -1,6 +1,8 @@
 import '@/app/_styles/globalStyles.css';
 import Header from './_components/Header';
 import { Josefin_Sans } from 'next/font/google';
+import { ReservationProvider } from './_contexts/ReservationContext';
+import ReservationReminder from './_components/ReservationReminder';
 
 const josefinSans = Josefin_Sans({
     subsets: ['latin'],
@@ -18,12 +20,14 @@ export const metadata = {
 function Layout({ children }) {
     return (
         <html lang="en">
-            <body className={`${josefinSans.className} bg-primary-950 text-gray-50 min-h-screen flex flex-col w-full `}>
+            <body className={`${josefinSans.className} bg-primary-950 text-gray-50 h-screen min-h-screen flex flex-col w-full `}>
                 <Header />
-                <div className=' flex-1 px-8 py-12 w-full grid'>
-                    <main className=' mx-auto max-w-[120rem] '>
-                        {children}
-                    </main>
+                <div className=' flex-1 px-24 py-12 w-full grid overflow-scroll hide-scrollbar'>
+                    <ReservationProvider>
+                        <main className=' mx-auto max-w-[120rem] w-full '>
+                            {children}
+                        </main>
+                    </ReservationProvider>
                 </div>
             </body>
         </html>
