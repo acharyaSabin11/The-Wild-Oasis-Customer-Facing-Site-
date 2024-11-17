@@ -13,10 +13,12 @@ function ReservationItem({ booking, handleDelete }) {
             </div>
             <div className="flex-1 flex flex-col px-4 py-4">
                 <div className="flex justify-between items-center">
-                    <h5 className="text-2xl">{numNights} nights in Cabin {cabinName}</h5>
+                    <div>
+                        <h5 className="text-2xl">{numNights} nights in Cabin {cabinName}</h5>
+                        <p className="text-primary-500 flex-1">{formatDateWithDistance(startDate)} - {formatDateFull(endDate)}</p>
+                    </div>
                     <span className={`uppercase flex items-center font-bold text-[10px] px-3 py-2 ${status === 'checked-out' && 'bg-accent-600'} ${status === 'checked-in' && 'bg-green-600'} ${status === 'unconfirmed' && 'bg-blue-600'} rounded-sm`}>{status === 'checked-out' ? 'Past' : status}</span>
                 </div>
-                <p className="text-primary-500 flex-1">{formatDateWithDistance(startDate)} - {formatDateFull(endDate)}</p>
                 <div className="flex mt-6 gap-4 justify-between">
                     <div className="flex gap-4 flex-1 items-center">
                         <p>${totalPrice}</p>
@@ -26,9 +28,13 @@ function ReservationItem({ booking, handleDelete }) {
                     <p className="flex-1 text-right">Booked {formatDateFullWithTime(created_at)}</p>
                 </div>
             </div>
-            <div className="flex flex-col justify-center divide-y-2 divide-primary-900">
-                <Link className="flex flex-1 gap-3 items-center px-4 rounded-sm py-2 hover:bg-accent-500 hover:text-primary-800 text-sm" href={`/account/reservations/edit/${booking.id}`}><PencilIcon className="size-4" /> Edit</Link>
-                <DeleteButton bookingId={booking.id} handleDelete={handleDelete} />
+            <div className="flex flex-col justify-center divide-y-2 divide-primary-900 w-32">
+                {(status !== 'checked-out') &&
+                    <>
+                        <Link className="flex flex-1 gap-3 items-center px-4 rounded-sm py-2 hover:bg-accent-500 hover:text-primary-800 text-sm" href={`/account/reservations/edit/${booking.id}`}><PencilIcon className="size-4" /> Edit</Link>
+                        <DeleteButton bookingId={booking.id} handleDelete={handleDelete} />
+                    </>
+                }
             </div>
         </div>
     )

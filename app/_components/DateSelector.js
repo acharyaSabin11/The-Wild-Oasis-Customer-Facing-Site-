@@ -26,16 +26,13 @@ function DateSelector({ currentBookings, cabinId }) {
         let isInvalid = false;
         disabledDates.forEach(disabled => {
             if (areIntervalsOverlapping({ start: disabled.after, end: disabled.before }, selectedRange)) {
-                console.log(1);
                 setRange(null);
-                console.log(2);
                 isInvalid = true;
                 toast.error('A booking already exists in that date');
                 return;
             }
         });
         if (!isInvalid) {
-            console.log(3);
             setRange(range);
         }
     }

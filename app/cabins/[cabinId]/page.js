@@ -1,12 +1,8 @@
-import DateSelector from "@/app/_components/DateSelector";
 import Reservation from "@/app/_components/Reservation";
-import ReservationCost from "@/app/_components/ReservationCost";
-import ReservationForm from "@/app/_components/ReservationForm";
-import ReservationReminder from "@/app/_components/ReservationReminder";
 import Spinner from "@/app/_components/Spinner";
 import TextExpander from "@/app/_components/TextExpander";
-import { getCabinById, getCabins } from "@/app/_lib/api_cabins";
-import { EyeIcon, EyeSlashIcon, UsersIcon } from "@heroicons/react/24/outline";
+import { getCabinById } from "@/app/_lib/api_cabins";
+import { EyeSlashIcon, UsersIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { Suspense } from "react";
 

@@ -15,7 +15,6 @@ const links = [
 ];
 
 function Navigation({ session }) {
-    console.log(session);
     const pathName = usePathname();
     const activeStyle = 'text-accent-500';
     return (

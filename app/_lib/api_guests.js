@@ -33,7 +33,6 @@ export async function getGuestByEmail(email) {
 }
 
 export async function updateGuest({ guestId, updateData }) {
-    console.log(guestId, updateData);
     const { data, error } = await supabase
         .from('guests')
         .update(updateData)

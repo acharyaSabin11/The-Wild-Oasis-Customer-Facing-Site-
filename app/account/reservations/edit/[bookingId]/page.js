@@ -6,10 +6,8 @@ import { getBookingByBookingIdWithOtherTables } from "@/app/_lib/api_bookings";
 async function page({ params }) {
     const { bookingId } = await params;
     const booking = await getBookingByBookingIdWithOtherTables(bookingId);
-    console.log(booking);
     const { numGuests, observations, cabins } = booking;
     const { maxCapacity } = cabins;
-    console.log(observations);
 
     const updateReservation = updateReservationAction.bind(null, bookingId);
     return (
@@ -21,7 +19,7 @@ async function page({ params }) {
                 <FormRowVertical>
                     <label htmlFor="numGuests">How many guests?</label>
                     <select name="numGuests" id="numGuests" className="w-full h-10 bg-primary-300 text-primary-900 px-4 outline-none border-solid border-accent-500 focus:border-2" defaultValue={numGuests} key={numGuests}>
-                        {Array.from({ length: maxCapacity }, (_, i) => i + 1).map(val => <option value={val}>{val}</option>)}
+                        {Array.from({ length: maxCapacity }, (_, i) => i + 1).map(val => <option key={val} value={val}>{val}</option>)}
                     </select>
                 </FormRowVertical>
                 <FormRowVertical>

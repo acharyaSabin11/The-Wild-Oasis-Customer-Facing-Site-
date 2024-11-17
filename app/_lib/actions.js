@@ -6,7 +6,6 @@ import { auth, signIn, signOut } from "./auth";
 import { createBooking, deleteBooking, getBookingByBookingId, updateBooking } from "./api_bookings";
 import { redirect } from "next/navigation";
 import { getCabinById } from "./api_cabins";
-// import toast from "react-hot-toast";
 
 export async function signInWithGoogle() {
     await signIn('google', { redirectTo: '/account' });
@@ -82,9 +81,6 @@ export async function updateReservationAction(bookingId, formData) {
         observations: formData.get('observations'),
     }
     await updateBooking(bookingId, updateValue);
-
-    // toast.success(`Reservation #${bookingId} updated successfully`);
-    // toast.success('Updation Success');
 
     revalidatePath(`/account/reservations/edit/${bookingId}`);
     revalidatePath(`/account/reservations`);

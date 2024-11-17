@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link"
-import { ArrowLeftStartOnRectangleIcon, CalendarDaysIcon, HomeIcon, UserIcon } from '@heroicons/react/24/outline'
+import { CalendarDaysIcon, HomeIcon, UserIcon } from '@heroicons/react/24/outline'
 import { usePathname } from "next/navigation";
 import SignOutButton from "./SignOutButton";
 
