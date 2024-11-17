@@ -29,7 +29,7 @@ function ReservationItem({ booking, handleDelete }) {
                 </div>
             </div>
             <div className="flex flex-col justify-center divide-y-2 divide-primary-900 w-32">
-                {(status !== 'checked-out') &&
+                {(status === 'unconfirmed') &&
                     <>
                         <Link className="flex flex-1 gap-3 items-center px-4 rounded-sm py-2 hover:bg-accent-500 hover:text-primary-800 text-sm" href={`/account/reservations/edit/${booking.id}`}><PencilIcon className="size-4" /> Edit</Link>
                         <DeleteButton bookingId={booking.id} handleDelete={handleDelete} />

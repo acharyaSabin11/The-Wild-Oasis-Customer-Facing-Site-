@@ -15,9 +15,11 @@ async function CabinsList({ filter }) {
         displayCabins = cabins;
     }
 
+    const sortedDisplayCabins = displayCabins.slice().sort((a, b) => a.name.localeCompare(b.name));
+
     return (
         <div className=" mt-12 grid grid-cols-[repeat(auto-fill,_minmax(420px,1fr))] gap-6 break-words grid-flow-row ">
-            {displayCabins.map(cabin => (<CabinItem key={cabin.id} cabin={cabin} />))}
+            {sortedDisplayCabins.map(cabin => (<CabinItem key={cabin.id} cabin={cabin} />))}
         </div>
     )
 }
