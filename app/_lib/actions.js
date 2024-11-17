@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { updateGuest } from "./api_guests";
 import { auth, signIn, signOut } from "./auth";
-import { deleteBooking, getBookingByBookingId, updateBooking } from "./api_bookings";
+import { createBooking, deleteBooking, getBookingByBookingId, updateBooking } from "./api_bookings";
 import { redirect } from "next/navigation";
+import { getCabinById } from "./api_cabins";
 // import toast from "react-hot-toast";
 
 export async function signInWithGoogle() {
@@ -89,4 +90,36 @@ export async function updateReservationAction(bookingId, formData) {
     revalidatePath(`/account/reservations`);
 
     redirect('/account/reservations');
+}
+
+export async function createReservationAction(extraData, formData) {
+    const session = await auth();
+    if (!session) throw new Error('Your must first login to update reservation');
+
+    const { user: { guest: { id: guestId } } } = session;
+
+    const { cabinId, startDate, endDate, numNights } = extraData;
+
+    const cabin = await getCabinById(cabinId);
+    const numGuests = Number(formData.get('numGuests'));
+
+    const creationData = {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+        numNights,
+        numGuests,
+        cabinPrice: cabin.regularPrice * numNights * numGuests,
+        extrasPrice: 0,
+        totalPrice: cabin.regularPrice * numNights * numGuests,
+        status: 'unconfirmed',
+        hasBreakfast: false,
+        isPaid: false,
+        observations: formData.get('observations'),
+        cabinId,
+        guestId,
+    }
+
+    await createBooking(creationData);
+
+    redirect('/account/reservations/thankyou');
 }

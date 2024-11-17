@@ -1,7 +1,7 @@
 import { formatDistance, parseISO } from "date-fns";
 
 export function getSubDays(date1, date2) {
-    return Math.ceil(Math.abs(new Date(date1) - new Date(date2)) / 86400000)
+    return Math.ceil(Math.abs(new Date(date1) - new Date(date2)) / 86400000) + 1
 }
 
 export const formatDistanceFromNow = (dateStr) =>

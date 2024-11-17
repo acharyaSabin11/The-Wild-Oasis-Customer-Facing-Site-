@@ -53,12 +53,22 @@ export async function deleteBooking(id) {
 }
 
 export async function updateBooking(id, updateData) {
-    console.log(id, updateData);
     const { data, error } = await supabase.from('bookings').update(updateData).eq('id', id);
 
     if (error) {
         console.log(error);
         throw new Error(`Couldn't update the bookings of id #${id}`);
+    }
+
+    return data;
+}
+
+export async function createBooking(creationData) {
+    const { data, error } = await supabase.from('bookings').insert(creationData).select();
+
+    if (error) {
+        console.log(error);
+        throw new Error(`Couldn't creating the bookings`);
     }
 
     return data;

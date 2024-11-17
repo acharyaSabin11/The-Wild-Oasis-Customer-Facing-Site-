@@ -2,7 +2,6 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDateFull, formatDateFullWithTime, formatDateWithDistance } from "../_lib/helpers";
-import { deleteReservationAction } from "../_lib/actions";
 
 function ReservationItem({ booking, handleDelete }) {
     const { numNights, numGuests, cabins, startDate, endDate, created_at, status, totalPrice } = booking;
