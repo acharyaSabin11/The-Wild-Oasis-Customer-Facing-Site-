@@ -117,5 +117,12 @@ export async function createReservationAction(extraData, formData) {
 
     await createBooking(creationData);
 
+    revalidatePath(`/cabins/${cabinId}`);
+
+    return true;
+}
+
+
+export async function redirectToThanksPage() {
     redirect('/account/reservations/thankyou');
 }

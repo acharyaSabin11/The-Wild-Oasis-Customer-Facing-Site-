@@ -8,11 +8,11 @@ function ReservationsList({ bookings }) {
     async function handleDelete(bookingId) {
         deleteOptimistic(bookingId);
         await deleteReservationAction(bookingId);
-
     }
+    const sortedBookings = optimisticBookings.slice().sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
     return (
         <div className="flex flex-col gap-4 w-full">
-            {optimisticBookings.map(booking => <ReservationItem booking={booking} key={booking.id} handleDelete={handleDelete} />)}
+            {sortedBookings.map(booking => <ReservationItem booking={booking} key={booking.id} handleDelete={handleDelete} />)}
         </div>
     )
 }

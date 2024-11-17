@@ -3,13 +3,28 @@
 import Image from "next/image";
 import { useReservation } from "../_contexts/ReservationContext";
 import FormRowVertical from "./FormRowVertical"
-import { createReservationAction } from "../_lib/actions";
+import { createReservationAction, redirectToThanksPage } from "../_lib/actions";
 import { getSubDays } from "../_lib/helpers";
 import { useFormStatus } from 'react-dom';
 
 function ReservationForm({ cabin, userName, userImage }) {
-    const { setCabinId, range } = useReservation();
+    //HOOKS:
+    const { range, resetRange } = useReservation();
+
+    //Destructuing Object
     const { maxCapacity, id } = cabin;
+
+    //Action
+    async function handleFormSubmission(formData) {
+        if (!range) return;
+        const result = await createReservationAction({ numNights: getSubDays(range.from, range.to), cabinId: id, startDate: range.from, endDate: range.to }, formData);
+        if (result) {
+            resetRange();
+            await redirectToThanksPage();
+        }
+    }
+
+    //Render Logic
     return (
         <div className="flex-1 flex flex-col rounded-sm bg-primary-900 min-w-[30rem] h-full">
             <div className="flex py-2 px-8 justify-between items-center bg-primary-800">
@@ -21,10 +36,7 @@ function ReservationForm({ cabin, userName, userImage }) {
                     <span>{userName}</span>
                 </div>
             </div>
-            <form action={(formData) => {
-                if (!range) return;
-                createReservationAction({ numNights: getSubDays(range.from, range.to), cabinId: id, startDate: range.from, endDate: range.to }, formData)
-            }} className="w-full py-8 px-8 flex flex-col gap-6 justify-between  flex-1">
+            <form action={handleFormSubmission} className="w-full py-8 px-8 flex flex-col gap-6 justify-between  flex-1">
                 <div className="flex flex-col gap-6">
                     <FormRowVertical>
                         <label htmlFor="guestsCount">How many guests?</label>
@@ -42,7 +54,7 @@ function ReservationForm({ cabin, userName, userImage }) {
                     <ReserveButton range={range} />
                 </div>
             </form>
-        </div>
+        </div >
     )
 }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useEffect } from "react";
 
 function Filter({ filterField, options }) {
     const searchParams = useSearchParams();
@@ -11,6 +12,14 @@ function Filter({ filterField, options }) {
         params.set(filterField, value);
         router.replace(`${pathName}?${params}`)
     }
+
+    useEffect(function () {
+        const params = new URLSearchParams('');
+        params.set('capacity', 'all');
+        router.replace(`${pathName}?${params}`);
+    }, [router, pathName])
+
+
     return (
         <div className="flex border-2 border-primary-800 divide-x-2 divide-primary-800">
             {options.map(option =>

@@ -10,7 +10,7 @@ function UpdateProfileForm({ children, guest }) {
             <input type="hidden" name="guestId" value={guest.id} />
             <FormRowVertical>
                 <label className="text-lg" htmlFor="fullName" >Full Name</label>
-                <input id='fullName' name="fullName" type="text" defaultValue={guest.fullName} className="w-full h-12 bg-primary-800 px-6 outline-none border-solid border-accent-500 focus:border-2" />
+                <input id='fullName' name="fullName" type="text" defaultValue={guest.fullName} key={guest.fullName} className="w-full h-12 bg-primary-800 px-6 outline-none border-solid border-accent-500 focus:border-2" />
             </FormRowVertical>
             <FormRowVertical>
                 <label className="text-lg " htmlFor="email">Email Address</label>
@@ -19,7 +19,7 @@ function UpdateProfileForm({ children, guest }) {
             {children}
             <FormRowVertical>
                 <label className="text-lg" htmlFor="nationalID">National ID Number</label>
-                <input id="nationalID" name="nationalID" type="number" defaultValue={guest.nationalID} className="w-full h-12 bg-primary-800 px-6 outline-none border-solid border-accent-500 focus:border-2" />
+                <input id="nationalID" name="nationalID" type="number" defaultValue={guest.nationalID} key={guest.nationalID} className="w-full h-12 bg-primary-800 px-6 outline-none border-solid border-accent-500 focus:border-2" />
             </FormRowVertical>
             <SubmitButton />
         </form>

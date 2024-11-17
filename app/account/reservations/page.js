@@ -12,7 +12,7 @@ async function page() {
             {bookings.length === 0 && <p>
                 You hanve no current reservations.
                 <Link href='/cabins' className="text-accent-500 ml-2">Explore our luxury cabins &rarr;</Link></p>}
-            {bookings.length && <ReservationsList bookings={bookings} />}
+            {!!bookings.length && <ReservationsList bookings={bookings} />}
         </div>
     )
 }
